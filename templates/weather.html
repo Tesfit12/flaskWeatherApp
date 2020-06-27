@@ -13,7 +13,7 @@
   <body>
       
       <div class="jumbotron">
-                <h1>Flask Weather App.</h1>
+      <h1 style="font-family: Cursive;">Flask Weather App.</h1>
                <hr/>
 
                     <div class="container form_container">
@@ -42,7 +42,7 @@
 
                                 {% for city in list_of_citys %}
 
-                                    <tr>
+                                    <tr class="text-bold">
                                        <th scope="row">{{ loop.index }}</th>
                                         <td>{{ city.city }}</td>
                                         <td>{{ city.temperature }}°</td>

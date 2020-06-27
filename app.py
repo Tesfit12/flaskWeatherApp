@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 # from requests.api import request
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///weather.db'
 
 # create DB
@@ -40,18 +39,26 @@ def index():
     for city in all_citys:
 
         url = f'http://api.openweathermap.org/data/2.5/weather?q={city.name}&units=imperial&appid={key_code}'
-        r = requests.get(url).json()
+        r = requests.get(url).json()  # will give u cod 200 or 400
 
-        weather_obj_list = {
-            'city': r['name'],
-            'temperature': r['main']['temp'],
-            'description': r['weather'][0]['description'],
-            'icon': r['weather'][0]['icon'],
-        }
 
-        list_of_citys.append(weather_obj_list)
+
+        # Celsius = (Fahrenheit – 32) * 5/9
+        # Fahrenheit = (Celsius * 9/5) + 32
+
+        if r['cod'] == 200: # meaning if city exist
+            weather_obj_list = {
+                'city': r['name'],
+                'temperature': round(int((r['main']['temp'] - 32) * 5/9)),
+                'description': r['weather'][0]['description'],
+                'icon': r['weather'][0]['icon'],
+            }
+
+            list_of_citys.append(weather_obj_list)
+
 
     return render_template('weather.html', list_of_citys=list_of_citys)
+
 
 
 
@@ -64,3 +71,9 @@ def delete_all():
     return redirect('/')
 
      
+
+
+
+
+if __name__== '__main__':
+    app.run(debug=True)
