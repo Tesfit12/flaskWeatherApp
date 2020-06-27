@@ -6,20 +6,21 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/style.css">
-    <title>Hello, world!</title>
+    <title>weather-app</title>
   </head>
 
 
   <body>
       
       <div class="jumbotron">
-                <h1>Flask Weather App!</h1>
+                <h1>Flask Weather App.</h1>
+               <hr/>
 
                     <div class="container form_container">
                         <form method="POST">
-                                    <input class="input" name="city" type="text" placeholder="City Name">
+                                    <input  id="input" name="city_name" type="text" placeholder="City Name">
                                     <button class="btn btn-primary">Add City</button>
-                                    <button class="btn btn-danger">Clear</button>
+                                    <button class="btn btn-danger"><a href="{{ url_for('delete_all') }}" class="text-white">Delete All</a></button>
                 
                         </form>
                     </div>
@@ -38,16 +39,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>{{ weather_obj.city }}</td>
-                                    <td>{{ weather_obj.temperature }}°</td>
-                                    <td>{{ weather_obj.description }}</td>
-                                    <td>
-                                            <img src="http://openweathermap.org/img/w/{{ weather_obj.icon }}.png" alt="Image">
-                                    </td>
 
-                                </tr>
+                                {% for city in list_of_citys %}
+
+                                    <tr>
+                                       <th scope="row">{{ loop.index }}</th>
+                                        <td>{{ city.city }}</td>
+                                        <td>{{ city.temperature }}°</td>
+                                        <td>{{ city.description }}</td>
+                                        <td>
+                                                <img src="http://openweathermap.org/img/w/{{ city.icon }}.png" alt="Image">
+                                        </td>
+
+                                      </tr>
+                                  
+                                {% endfor%}
+
                                 </tbody>
                             </table>
 
