@@ -1,0 +1,22 @@
+.form_container{
+    display: flex;
+    /* width: 80%; */
+    margin-left: 37.7%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+
+h1{
+    margin-left: 38%;
+    color: blue;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.jumbotron{
+    background-color: darkgray !important;
+}
+body{
+    background-color: darkgray !important;
+}
